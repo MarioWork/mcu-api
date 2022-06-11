@@ -1,5 +1,5 @@
-const fp = required('fastify-plugin');
-const { PrismaClient } = require('prisma-client');
+const fp = require('fastify-plugin');
+const { PrismaClient } = require('@prisma/client');
 
 const metadata = {
     name: 'prisma'
@@ -10,10 +10,10 @@ const register = async (fastify) => {
 
     const prisma = new PrismaClient();
 
-    const [error] = await fastify.to(prisma.$connect());
-
-    if (error) {
-        fastify.log.info(error, 'Failed to connect to database');
+    try {
+        await prisma.$connect();
+    } catch (error) {
+        fastify.log.info('Failed to connect to database: \n' + error);
         throw error;
     }
 
