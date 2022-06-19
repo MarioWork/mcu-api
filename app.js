@@ -10,5 +10,4 @@ module.exports = async function (fastify, opts) {
     .register(api)
     .register(prisma)
     .register(shutdown)
-
 }
