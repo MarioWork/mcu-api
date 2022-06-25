@@ -13,7 +13,6 @@ module.exports = async function (prisma) {
 
         return { key };
     } catch (e) {
-        // throw new Error("Something went wrong generating key");
-        throw new Error(e.message);
+        throw new Error(e);
     }
 }
