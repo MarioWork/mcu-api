@@ -1,19 +1,20 @@
 const generateKey = require('../../use-cases/generate-key');
 
 module.exports = async function (fastify) {
-    const { to, httpErrors, prisma } = fastify;
-
-    await fastify.get(
+    fastify.get(
         '/',
-        { schema },
+        {
+            schema
+        },
         async () => {
+            const { to, prisma, httpErrors } = fastify;
+
             const [error, response] = await to(generateKey(prisma));
 
-            return error ? httpErrors.internalServerError(error.message) : response
+            return error ? httpErrors.serviceUnavailable('Something went wrong generating a key.') : response;
         }
     )
-};
-
+}
 
 const schema = {
     response: {
@@ -24,5 +25,5 @@ const schema = {
             }
         }
     }
-};
+}
 
