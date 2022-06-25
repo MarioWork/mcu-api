@@ -14,7 +14,8 @@ const register = async (fastify) => {
     const [error] = await fastify.to(prisma.$connect());
 
     if (error) {
-        fastify.log.info('Failed to connect to database: \n' + error);
+        fastify.log.error('Failed to connect to database: \n' + error);
+        throw error;
     }
 
     fastify.decorate('prisma', prisma);

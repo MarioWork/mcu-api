@@ -10,8 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Media {
-  id    Int     @id @default(autoincrement())
-  title String  
-  description  String?
+model User{
+  id Int @id @default(autoincrement())
+  key String 
 }

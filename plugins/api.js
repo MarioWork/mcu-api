@@ -9,8 +9,6 @@ const metadata = {
 const register = async function (fastify) {
     fastify.log.info(`Registering ${metadata.name} plugin`);
 
-    // This loads all plugins defined in routes
-    // define your routes in one of these
     await fastify.register(fastifyAutoload, {
         dir: path.join(process.cwd(), 'routes'),
         options: { prefix: '/api' },
