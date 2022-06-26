@@ -12,5 +12,6 @@ datasource db {
 
 model User{
   id Int @id @default(autoincrement())
-  key String 
+  key String @unique
+  isAdmin Boolean @default(false)
 }

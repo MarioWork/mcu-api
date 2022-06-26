@@ -4,6 +4,7 @@ module.exports = async function (fastify) {
     fastify.get(
         '/',
         {
+            preValidation: fastify.authenticate({ isAdmin: true }),
             schema
         },
         async () => {
